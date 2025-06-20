@@ -1,124 +1,469 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>세계 명소 소개</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>세계 건축 탐구 | ArchDaily 스타일</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --main-gradient: linear-gradient(120deg, #4b86b4 0%, #3db47c 100%);
+      --main-bg: #f5f7fa;
+      --section1-bg: #f4fafd;
+      --section2-bg: #fff;
+      --section3-bg: #eaf7fc;
+      --border: #e5e7eb;
+      --font-title: 'Montserrat', 'Noto Sans KR', sans-serif;
+      --font-body: 'Noto Sans KR', Arial, sans-serif;
+      --eiffel: #4b86b4;
+      --greatwall: #b46b4b;
+      --liberty: #3db47c;
+      --concept: #f9b24b;
+    }
     body {
       margin: 0;
-      font-family: 'Nanum Gothic', sans-serif;
-      background: #fdfcfb;
-      color: #333;
+      background: var(--main-bg);
+      color: #222;
+      font-family: var(--font-body);
     }
-
-    header {
-      background: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
-      color: white;
-      padding: 5rem 1rem;
+    /* HERO */
+    .homepage-hero-bg {
+      width: 100vw;
+      min-height: 520px;
+      background: var(--main-gradient);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-end;
+    }
+    .homepage-hero-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      opacity: 0.22;
+      z-index: 1;
+    }
+    .homepage-hero-bg::after {
+      content: "";
+      position: absolute;
+      right: -120px; bottom: -60px;
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, #fff7 0 35%, transparent 70%);
+      opacity: 0.35;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .homepage-hero-inner {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      height: 520px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2.2rem 0 2.2rem;
+    }
+    .site-logo {
+      width: 70px; height: 70px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 4px 24px rgba(44,62,80,0.13);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.1rem;
+      margin-top: 2.5rem;
+      font-size: 2.2rem;
+      font-family: var(--font-title);
+      font-weight: bold;
+      color: #4b86b4;
+      letter-spacing: -0.04em;
+      border: 3px solid #3db47c;
+      position: relative;
+    }
+    .homepage-hero-title {
+      font-family: var(--font-title);
+      font-size: 2.8rem;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 0.7rem;
+      text-shadow: 0 2px 14px rgba(44,62,80,0.13);
+      letter-spacing: 0.03em;
+    }
+    .homepage-hero-desc {
+      font-size: 1.25rem;
+      color: #eaf7fc;
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 1px 8px rgba(44,62,80,0.12);
+    }
+    .homepage-hero-cta {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.8rem 2.2rem;
+      background: #fff;
+      color: #3db47c;
+      font-family: var(--font-title);
+      font-weight: bold;
+      border-radius: 9px;
+      font-size: 1.13rem;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(44,62,80,.13);
+      transition: background 0.2s, color 0.2s;
+      border: none;
+      outline: none;
+    }
+    .homepage-hero-cta:hover {
+      background: #3db47c;
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(44,62,80,.19);
+    }
+    .homepage-hero-nav {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .homepage-hero-nav a {
+      color: #eaf7fc;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-family: var(--font-title);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      padding-bottom: 4px;
+      border-bottom: 2.5px solid transparent;
+      transition: border 0.2s, color 0.2s;
+    }
+    .homepage-hero-nav a.active, .homepage-hero-nav a:hover {
+      color: #fff;
+      border-bottom: 2.5px solid #fff;
+    }
+    .lang-switcher-home {
+      margin-top: 1.5rem;
+      margin-bottom: 1.7rem;
+    }
+    .lang-switcher-home button {
+      background: #fff3;
+      color: #fff;
+      border: none;
+      margin: 0 0.15rem;
+      padding: 0.45rem 1rem;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lang-switcher-home button.active, .lang-switcher-home button:hover {
+      background: #fff;
+      color: #3db47c;
+    }
+    /* SECTION: 소개/건축의 의의 */
+    .section-intro {
+      background: var(--section1-bg);
+      padding: 3.5rem 0 2.5rem 0;
       text-align: center;
     }
-
-    header h1 {
-      font-size: 3rem;
+    .section-intro h2 {
+      font-family: var(--font-title);
+      font-size: 2rem;
+      color: #4b86b4;
+      margin-bottom: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+    .section-intro p {
+      color: #444;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto 0.3rem auto;
+    }
+    /* SECTION: 건축의 3요소 */
+    .section-elements {
+      background: var(--section3-bg);
+      padding: 3.2rem 0 2.5rem 0;
+      text-align: center;
+    }
+    .section-elements h2 {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      color: #3db47c;
+      margin-bottom: 1.2rem;
+    }
+    .elements-list {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      max-width: 900px;
+    }
+    .element-card {
+      background: #fff;
+      border-radius: 13px;
+      box-shadow: 0 2px 12px rgba(44,62,80,0.10);
+      padding: 1.5rem 1.1rem 1.3rem 1.1rem;
+      flex: 1 1 220px;
+      min-width: 220px;
+      max-width: 320px;
+      margin-bottom: 1.1rem;
+      text-align: left;
+    }
+    .element-card h3 {
+      font-size: 1.17rem;
+      color: #4b86b4;
+      margin-bottom: 0.5rem;
+      font-family: var(--font-title);
+    }
+    .element-card p {
+      color: #444;
+      font-size: 1.04rem;
+      line-height: 1.7;
       margin: 0;
     }
-
-    header p {
-      font-size: 1.2rem;
-      margin-top: 1rem;
-      opacity: 0.9;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-      padding: 3rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 25px rgba(0,0,0,0.1);
-    }
-
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .card-content {
-      padding: 1.5rem;
-    }
-
-    .card-content h3 {
-      margin-top: 0;
-      color: #0077cc;
-    }
-
-    .card-content p {
-      line-height: 1.6;
-      font-size: 0.95rem;
-    }
-
-    footer {
+    /* SECTION: 대표 건축물 */
+    .section-featured {
+      background: var(--section2-bg);
+      padding: 3.2rem 0 2.7rem 0;
       text-align: center;
-      padding: 2rem 1rem;
-      background: #eee;
+    }
+    .section-title {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
       color: #555;
-      font-size: 0.9rem;
+      margin: 0 0 1.2rem 0;
+      letter-spacing: 0.04em;
+      border-left: 6px solid #222;
+      padding-left: 0.7rem;
+      display: inline-block;
+      background: #eaf7fc;
+      border-radius: 7px;
+    }
+    .project-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 2.2rem;
+    }
+    .project-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 20px rgba(44,62,80,.09);
+      width: 340px;
+      min-width: 260px;
+      display: flex;
+      flex-direction: column;
+      border-top: 8px solid var(--eiffel);
+      transition: box-shadow 0.2s, border-color 0.3s;
+      overflow: hidden;
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+    }
+    .project-card.greatwall { border-top-color: var(--greatwall);}
+    .project-card.liberty { border-top-color: var(--liberty);}
+    .project-img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      background: #eee;
+      border-bottom: 1px solid var(--border);
+    }
+    .project-content {
+      padding: 1.2rem 1.1rem 1.1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .project-title {
+      font-size: 1.18rem;
+      font-family: var(--font-title);
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 0.2rem;
+    }
+    .project-meta {
+      font-size: 0.95rem;
+      color: #888;
+      margin-bottom: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+    .project-meta span {
+      background: #f4f4f4;
+      border-radius: 4px;
+      padding: 0.13rem 0.5rem;
+      font-size: 0.92rem;
+    }
+    .project-desc {
+      color: #444;
+      font-size: 1.01rem;
+      margin-bottom: 0.4rem;
+      line-height: 1.6;
+    }
+    @media (max-width: 900px) {
+      .homepage-hero-inner {padding:0 1.1rem;height:340px;}
+      .homepage-hero-title {font-size:1.5rem;}
+      .homepage-hero-desc {font-size:1rem;}
+      .homepage-hero-bg {min-height:340px;}
+      .project-list, .elements-list {flex-direction:column;align-items:center;}
+      .project-card, .element-card {width:96%;min-width:0;}
+    }
+    @media (max-width: 600px) {
+      .homepage-hero-inner {padding:0 0.5rem;height:180px;}
+      .homepage-hero-bg {min-height:180px;}
+      .homepage-hero-title {font-size:1.1rem;}
+      .homepage-hero-desc {font-size:0.97rem;}
+      .site-logo {width:40px;height:40px;font-size:1.1rem;}
+      .project-img {height:90px;}
+      .section-title {font-size:1.1rem;}
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <h1>세계 명소 소개</h1>
-    <p>가장 상징적인 여행지를 지금 만나보세요</p>
-  </header>
-
-  <section class="gallery">
-    <div class="card">
-      <img src="C:\Users\user\Desktop\20151218232246855_UPBH8B4K.jpg" alt="에펠탑" />
-      <div class="card-content">
-        <h3>에펠탑 (프랑스)</h3>
-        <p>프랑스 파리에 위치한 에펠탑은 1889년 만국박람회를 기념하여 지어진 아이콘입니다.</p>
+  <!-- HERO HOMEPAGE -->
+  <div class="homepage-hero-bg" id="homepage-hero-bg">
+    <div class="homepage-hero-inner">
+      <div class="site-logo">A</div>
+      <div class="homepage-hero-title" id="hero-title">건축, 공간을 넘어서</div>
+      <div class="homepage-hero-desc" id="hero-desc">
+        세계의 위대한 건축물과 혁신적 건축 개념을 탐구하세요. 과학과 예술, 그리고 인간의 삶이 만나는 공간, 바로 건축입니다.
+      </div>
+      <a href="#featured" class="homepage-hero-cta" id="hero-cta">건축물 둘러보기</a>
+      <div class="homepage-hero-nav">
+        <a href="#" id="nav-home" class="active" data-ko="홈" data-en="Home" data-zh="首页">홈</a>
+        <a href="#featured" id="nav-featured" data-ko="대표 건축물" data-en="Landmarks" data-zh="地标">대표 건축물</a>
+      </div>
+      <div class="lang-switcher-home">
+        <button onclick="setLang('ko')" class="active">한국어</button>
+        <button onclick="setLang('en')">English</button>
+        <button onclick="setLang('zh')">中文</button>
       </div>
     </div>
-
-    <div class="card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Great_Wall_of_China_July_2006.JPG" alt="만리장성" />
-      <div class="card-content">
-        <h3>만리장성 (중국)</h3>
-        <p>중국 전역에 걸쳐 이어진 성벽으로, 수천 년간 나라를 지키는 방어선 역할을 해왔습니다.</p>
+  </div>
+  <!-- 소개/의의 -->
+  <section class="section-intro">
+    <h2>건축이란 무엇인가?</h2>
+    <p>
+      건축은 인간이 생활하고 활동할 수 있는 공간을 계획하고 설계하며 실제로 짓는 행위입니다. 단순한 건물의 집합이 아니라, 기술과 예술, 그리고 사회적 가치를 모두 담아내는 종합적인 분야입니다.
+    </p>
+    <p>
+      건축은 공간을 넘어, 인간의 역사와 문화를 담아내며, 도시와 사회의 미래를 만들어갑니다.
+    </p>
+  </section>
+  <!-- 건축의 3요소 -->
+  <section class="section-elements">
+    <h2>건축의 3대 요소</h2>
+    <div class="elements-list">
+      <div class="element-card">
+        <h3>공간</h3>
+        <p>
+          건축에서 가장 중요한 요소로, 사람들이 생활하고 활동하는 실내·실외 공간을 의미합니다. 공간의 설계는 건축의 본질을 결정합니다.
+        </p>
       </div>
-    </div>
-
-    <div class="card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Statue_of_Liberty_7.jpg" alt="자유의 여신상" />
-      <div class="card-content">
-        <h3>자유의 여신상 (미국)</h3>
-        <p>뉴욕 항에 위치한 이 조각상은 자유와 희망의 상징으로 전 세계인의 사랑을 받고 있습니다.</p>
+      <div class="element-card">
+        <h3>구조</h3>
+        <p>
+          건축물이 안전하게 서 있을 수 있도록 하는 뼈대입니다. 기둥, 벽, 보 등 다양한 구조 방식이 사용되며, 기술의 발전과 함께 진화해왔습니다.
+        </p>
+      </div>
+      <div class="element-card">
+        <h3>재료</h3>
+        <p>
+          전통적으로 나무, 돌, 흙 등이 사용되었고, 현대에는 철강, 유리, 콘크리트 등 다양한 신소재가 등장하여 건축의 가능성을 넓혔습니다.
+        </p>
       </div>
     </div>
   </section>
-
-  <footer>
-    &copy; 2025 세계 명소 소개 | All rights reserved.
-  </footer>
-
+  <!-- 대표 건축물 -->
+  <section class="section-featured" id="featured">
+    <div class="section-title">대표 건축물</div>
+    <div class="project-list">
+      <div class="project-card eiffel">
+        <img class="project-img" src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80" alt="에펠탑" />
+        <div class="project-content">
+          <div class="project-title">에펠탑</div>
+          <div class="project-meta">
+            <span>프랑스 파리</span>
+            <span>1889년</span>
+            <span>철강 구조</span>
+          </div>
+          <div class="project-desc">
+            1889년 만국박람회를 기념해 건설된 에펠탑은 귀스타브 에펠이 설계한 철강 구조물로, 과학과 예술의 조화를 보여주는 파리의 상징입니다.
+          </div>
+        </div>
+      </div>
+      <div class="project-card greatwall">
+        <img class="project-img" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="만리장성" />
+        <div class="project-content">
+          <div class="project-title">만리장성</div>
+          <div class="project-meta">
+            <span>중국</span>
+            <span>기원전 7세기~명나라</span>
+            <span>돌, 벽돌</span>
+          </div>
+          <div class="project-desc">
+            만리장성은 북방 유목 민족의 침입을 막기 위해 여러 왕조에 걸쳐 건설된 세계 최장 방어용 성벽입니다.
+          </div>
+        </div>
+      </div>
+      <div class="project-card liberty">
+        <img class="project-img" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80" alt="자유의 여신상" />
+        <div class="project-content">
+          <div class="project-title">자유의 여신상</div>
+          <div class="project-meta">
+            <span>미국 뉴욕</span>
+            <span>1886년</span>
+            <span>동상, 철골 구조</span>
+          </div>
+          <div class="project-desc">
+            자유의 여신상은 미국의 자유와 민주주의를 상징하는 세계적인 조각상으로, 프랑스가 미국 독립 100주년을 기념해 선물했습니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    // --- 히어로 다국어 텍스트 ---
+    const heroData = {
+      ko: {
+        title: "건축, 공간을 넘어서",
+        desc: "세계의 위대한 건축물과 혁신적 건축 개념을 탐구하세요. 과학과 예술, 그리고 인간의 삶이 만나는 공간, 바로 건축입니다.",
+        cta: "건축물 둘러보기"
+      },
+      en: {
+        title: "Architecture Beyond Space",
+        desc: "Explore the world's greatest buildings and innovative concepts. Where science, art, and human life meet: that's architecture.",
+        cta: "Explore Buildings"
+      },
+      zh: {
+        title: "超越空间的建筑",
+        desc: "探索世界著名建筑与创新理念。科学、艺术与人类生活的交汇之处，就是建筑。",
+        cta: "浏览建筑"
+      }
+    };
+    function setLang(lang) {
+      document.querySelectorAll('.lang-switcher-home button').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === (lang === 'ko' ? '한국어' : lang === 'en' ? 'English' : '中文'));
+      });
+      document.getElementById('hero-title').textContent = heroData[lang].title;
+      document.getElementById('hero-desc').textContent = heroData[lang].desc;
+      document.getElementById('hero-cta').textContent = heroData[lang].cta;
+      document.querySelectorAll('[data-ko]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang);
+      });
+    }
+    window.setLang = setLang;
+    setLang('ko');
+  </script>
 </body>
 </html>
